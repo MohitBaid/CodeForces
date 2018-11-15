@@ -1,0 +1,120 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int n,k,i,j,l,m;	cin>>n>>k;
+	string a[n+1];
+	int A[100+2][100+2]={0};
+	for(i=0;i<n;i++)	cin>>a[i];
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			if(a[i][j]=='.')
+			{
+				int flag=1;
+				for(l=0;l<k;l++)
+				{
+					if(i-l>=0)
+					{
+						if(a[i-l][j]=='#')
+						{
+							flag=0;
+							break;
+						}		
+					}
+					else 
+					{
+						flag=0;
+						break;
+					}
+				}
+				if(flag==1)	
+				{
+					for(l=0;l<k;l++)
+						A[i-l][j]++;
+				}
+				flag=1;
+				for(l=0;l<k;l++)
+				{
+					if(i+l<n)
+					{
+						if(a[i+l][j]=='#')
+						{
+							flag=0;
+							break;
+						}		
+					}
+					else 
+					{
+						flag=0;
+						break;
+					}
+				}
+				if(flag==1)	
+				{
+					for(l=0;l<k;l++)
+						A[i+l][j]++;
+				}
+				flag=1;
+				for(l=0;l<k;l++)
+				{
+					if(j+l<n)
+					{
+						if(a[i][j+l]=='#')
+						{
+							flag=0;
+							break;
+						}		
+					}
+					else 
+					{
+						flag=0;
+						break;
+					}
+				}
+				if(flag==1)	
+				{
+					for(l=0;l<k;l++)
+						A[i][j+l]++;
+				}
+				flag=1;
+				for(l=0;l<k;l++)
+				{
+					if(j-l>=0)
+					{
+						if(a[i][j-l]=='#')
+						{
+							flag=0;
+							break;
+						}		
+					}
+					else 
+					{
+						flag=0;
+						break;
+					}
+				}
+				if(flag==1)	
+				{
+					for(l=0;l<k;l++)
+						A[i][j-l]++;
+				}
+			}
+		}
+	}
+	int x=1,y=1;m=0;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			if(A[i][j]>m)
+			{
+				m=A[i][j];
+				x=i+1;
+				y=j+1;
+			}
+		}
+	}
+	cout<<x<<" "<<y<<endl;
+}
